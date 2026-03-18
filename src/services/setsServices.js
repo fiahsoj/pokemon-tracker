@@ -19,3 +19,19 @@ export function updateCollected(name, collected) {
 
   return set
 }
+
+export function getCompletionPercentage(name){
+    const set = getSetByName(name)
+
+    if (!set) return null
+
+    const totalCards = set.totalCards
+
+    const ownedCards = userCards[name] || []
+
+    const ownedCount = ownedCards.length
+
+    const percentage = (ownedCount/totalCards) * 100
+
+    return percentage
+}
