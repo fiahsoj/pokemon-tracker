@@ -1,5 +1,14 @@
-export const sets = [
-  { name: "Base Set", collected: 30, total: 102 },
-  { name: "Jungle", collected: 17, total: 64 },
-  { name: "Fossil", collected: 50, total: 62 }
+const sets = [
+  {
+    id: 1,
+    name: "Base Set",
+    totalCards: 102
+  },
+  {
+    id: 2,
+    name: "Jungle",
+    totalCards: 64
+  }
 ]
+
+export default sets
