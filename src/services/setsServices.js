@@ -23,20 +23,30 @@ export function updateCollected(name, collected) {
 }
 
 export function getCompletionPercentage(userId,setId){
-    const userCards = collections.filter(item => item.userId === userId)
-    const cardsInSet = cards.filter(card => card.setId === setId)
-    const ownedCardsIds = userCards.map(item => item.cardId)
-    const ownedCardSet = new Set(ownedCardIds)
+  const userCards = collections.filter(item => item.userId === userId)
+  const cardsInSet = cards.filter(card => card.setId === setId)
+  const ownedCardsIds = userCards.map(item => item.cardId)
+  const ownedCardSet = new Set(ownedCardIds)
 
-    let ownedCount = 0
+  let ownedCount = 0
 
-    for (const card of cardsInSet){
-      if (ownedCardSet.has(cardsInSet)) {
-        ownedCount++
-      }
+  for (const card of cardsInSet){
+    if (ownedCardSet.has(cardsInSet)) {
+      ownedCount++
     }
-    const completionPercentage = (ownedCount / cardsInSet.length) * 100
-    const roundedPercentage = Number(completionPercentage.toFixed(2))
-    
-    return completionPercentage
+  }
+  const completionPercentage = (ownedCount / cardsInSet.length) * 100
+  const roundedPercentage = Number(completionPercentage.toFixed(2))
+
+  return completionPercentage
+}
+
+export function getMissingCards(userId,setId){
+  const cardsInSet = cards.filter(card => card.setId === setId)
+  const userCards = collections.filter(item => item.userId === userId)
+
+  const missingCards = cardsInSet.filter(card => {
+    return !userCards.some(item => item.cardId === card.id)
+  })
+  return missingCards.map(card => card.name)
 }
