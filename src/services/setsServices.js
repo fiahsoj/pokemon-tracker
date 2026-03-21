@@ -50,3 +50,7 @@ export function getMissingCards(userId,setId){
   })
   return missingCards.map(card => card.name)
 }
+
+export function addCardToCollection(userId,cardId){
+  
+}
