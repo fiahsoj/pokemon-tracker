@@ -51,6 +51,32 @@ export function getMissingCards(userId,setId){
   return missingCards.map(card => card.name)
 }
 
-export function addCardToCollection(userId,cardId){
+export function addCardToCollection(userId, cardId){
+  const existingCard = collections.find(item => item.userId === userId && item.cardId === cardId)
+
+  if(existingCard){
+    return null
+  }
+
+  const newCard = ({
+    userId,
+    cardId
+  })
+
+  collections.push(newCard)
+
+  return newCard
+}
+
+export function deleteCardFromCollection(userId,cardId){
+  const existingCard = collections.find(item =>
+  item.userId === userId &&
+  item.cardId === cardId)
   
+  if(!existingCard){
+    return null
+  }
+
+  collections = collections.filter(item => !(item.userId === userId && item.cardId === cardId))
+  return true
 }

@@ -47,4 +47,21 @@ app.post("/users/:userId/cards", validateUser, validateCard, (req,res) => {
   })
 })
 
+app.delete("/users/cards/:cardId", validateUser, (req,res) => {
+  const userId = req.user.id
+  const cardId = Number(req.params.cardId)
+
+  const deleteCard = deleteCardFromCollection(userId,cardId)
+
+  if(deleteCard){
+    return res.status(404).json({
+      error: "User does not own this card"
+    })
+  }
+
+  res.json({
+    cardDeleted: deleteCard
+  })
+})
+
 export default router
