@@ -1,4 +1,4 @@
-import {cards} from ".../data/cards.js"
+import {cards} from "../data/cards.js"
 
 export function validateCard(req, res, next){
     const cardId = Number(req.body.cardId)

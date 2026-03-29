@@ -1,4 +1,4 @@
-const sets = [
+export const sets = [
   {
     id: 1,
     name: "Base Set",
