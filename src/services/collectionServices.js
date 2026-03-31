@@ -2,13 +2,7 @@ import collections from "../data/collections.js"
 import { cards } from "../data/cards.js"
 
 export function getCollection(userId){
-    const userCollection = collections.filter(collection => collection.userId === userId)
-
-    if(!userCollection){
-        return null
-    }
-    
-    return userCollection.map(collection => collection.cardId)
+   return collections.filter(collection => collection.userId === userId)
 }   
 
 export function addCardToCollection(userId, cardId){

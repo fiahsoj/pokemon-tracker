@@ -8,6 +8,7 @@ import {
 } from "../controllers/collectionController.js"
 import { validateUser } from "../middleware/validateUser.js"
 import { validateCard } from "../middleware/validateCard.js"
+import { getSetProgressController } from "../controllers/setsController.js"
 
 const router = express.Router()
 
@@ -25,5 +26,8 @@ router.get("/:userId/sets/:setId/completion", validateUser, getCompletion)
 
 // GET /users/:userId/sets/:setId/missing → get missing cards
 router.get("/:userId/sets/:setId/missing", validateUser, getMissing)
+
+// GET /users/:userId/sets/:setId/progress -> get set progress
+router.get("/:userId/sets/:setId/progress", validateUser, getSetProgressController)
 
 export default router

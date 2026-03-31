@@ -1,6 +1,7 @@
 import {
   getAllSets,
-  getSetByName
+  getSetByName,
+  getSetProgress
 } from "../services/setsServices.js"
 
 export function getSets(req, res) {
@@ -15,4 +16,16 @@ export function getSet(req, res) {
   }
 
   res.json(set)
+}
+
+export function getSetProgressController(req,res){
+  const userId = req.user.id
+  const setId = Number(req.params.setId)
+
+  const progress = getSetProgress(userId, setId)
+
+  res.json({
+    success: true,
+    progress
+  })
 }
