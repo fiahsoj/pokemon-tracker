@@ -1,5 +1,7 @@
 import collections from "../data/collections.js"
 import { cards } from "../data/cards.js"
+import db from "../data/db.js"
+import { response } from "express"
 
 export function getCollection(userId){
    return collections.filter(collection => collection.userId === userId)
@@ -12,14 +14,39 @@ export function addCardToCollection(userId, cardId){
     return null
   }
 
-  const newCard = ({
-    userId,
-    cardId
+  return new Promise((resolve, reject) => {
+
+    db.get(
+      "SELECT * FROM collections WHERE userId = ? AND cardId = ?",
+      [userId,cardId],  
+      (err,row)=>{
+        if(err){
+          return reject(err)
+        }
+        if(row){
+          return resolve(null)
+        }
+      }
+    )
+
+    db.run(
+      "INSERT INTO collections (userId, cardId) VALUES (?, ?)",
+      [userId, cardId],
+      function(err){
+
+        if(err){
+          return reject(err)
+        }
+
+        resolve({
+          userId,
+          cardId
+        })
+
+      }
+    )
+
   })
-
-  collections.push(newCard)
-
-  return newCard
 }
 
 export function deleteCardFromCollection(userId,cardId){
